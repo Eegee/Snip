@@ -1,5 +1,26 @@
 CHANGES
 =======
+**v5.1.0 (2015-Aug-16):**
+* Added feature allowing Snip to display a popup notification on track change.
+* New Snip icon. Snip icon also moved out of the form resource and into a
+    global resource.
+* Fixed issue with Spotify not getting track information correctly if the
+    title had a : in it.
+* Fixed Snip writing which player it switched to when emptying files is
+    enabled.
+
+**v5.0.5 (2015-Jul-21):**
+* Renamed Swedish resource from se-SE to sv-SE.
+* Added Norwegian translation thanks to gummi.
+* Fixed Snip not saving settings in the event of not exiting via right-click.
+* Fixed Snip not writing song titles to text files for players other than
+    iTunes or Spotify.
+
+**v5.0.1 (2015-Jul-12):**
+* Fixed advertisements in Spotify causing a crash.
+* Updated Dutch translation by Eegee
+* Fix for Visual Studio paths with spaces by Eegee
+
 **v5.0.0 (2015-Jul-05):**
 * Updated Spotify code to work with the latest client.
 * Optimized text handling globally so it won't write text unless it changed.

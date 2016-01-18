@@ -36,7 +36,7 @@ namespace Winter
         {
             if (!string.IsNullOrEmpty(text))
             {
-                int maxLength = 127; // 128 max length minus 1
+                int maxLength = 120; // 128 max length minus 8 to stop issues with string length crashing the program
 
                 if (text.Length >= maxLength)
                 {
@@ -58,7 +58,7 @@ namespace Winter
             }
         }
 
-        private static void UpdateTextAndEmptyFile(string text)
+        public static void UpdateTextAndEmptyFilesMaybe(string text)
         {
             if (text != lastTextToWrite)
             {
@@ -66,34 +66,43 @@ namespace Winter
 
                 SetNotifyIconText(text);
 
-                File.WriteAllText(@Application.StartupPath + @"\Snip.txt", string.Empty);
-
-                if (Globals.SaveSeparateFiles)
+                if (Globals.EmptyFileIfNoTrackPlaying)
                 {
-                    File.WriteAllText(@Application.StartupPath + @"\Snip_Album.txt", string.Empty);
-                    File.WriteAllText(@Application.StartupPath + @"\Snip_Artist.txt", string.Empty);
-                    File.WriteAllText(@Application.StartupPath + @"\Snip_Track.txt", string.Empty);
+                    File.WriteAllText(@Application.StartupPath + @"\Snip.txt", string.Empty);
+                }
+                else
+                {
+                    File.WriteAllText(@Application.StartupPath + @"\Snip.txt", text);
+                }
+
+                if (Globals.EmptyFileIfNoTrackPlaying)
+                {
+                    if (Globals.SaveSeparateFiles)
+                    {
+                        File.WriteAllText(@Application.StartupPath + @"\Snip_Album.txt", string.Empty);
+                        File.WriteAllText(@Application.StartupPath + @"\Snip_Artist.txt", string.Empty);
+                        File.WriteAllText(@Application.StartupPath + @"\Snip_Track.txt", string.Empty);
+                    }
                 }
             }
         }
 
         public static void UpdateText(string text)
         {
-            if (Globals.EmptyFileIfNoTrackPlaying)
+            if (text != lastTextToWrite)
             {
-                UpdateTextAndEmptyFile(text);
-            }
-            else
-            {
-                if (text != lastTextToWrite)
+                lastTextToWrite = text;
+
+                // Set the text that appears on the notify icon.
+                SetNotifyIconText(text);
+
+                // Write the song title and artist to a text file.
+                File.WriteAllText(@Application.StartupPath + @"\Snip.txt", text);
+
+                // Display a popup message of the track.
+                if (Globals.DisplayTrackPopup)
                 {
-                    lastTextToWrite = text;
-
-                    // Set the text that appears on the notify icon.
-                    SetNotifyIconText(text);
-
-                    // Write the song title and artist to a text file.
-                    File.WriteAllText(@Application.StartupPath + @"\Snip.txt", text);
+                    Globals.SnipNotifyIcon.ShowBalloonTip(500, "Snip", text, ToolTipIcon.None);
                 }
             }
         }
@@ -124,6 +133,12 @@ namespace Winter
 
                 // Write the song title and artist to a text file.
                 File.WriteAllText(@Application.StartupPath + @"\Snip.txt", output);
+
+                // Display a popup message of the track.
+                if (Globals.DisplayTrackPopup)
+                {
+                    Globals.SnipNotifyIcon.ShowBalloonTip(500, "Snip", output, ToolTipIcon.None);
+                }
 
                 // Check if we want to save artist and track to separate files.
                 if (Globals.SaveSeparateFiles)

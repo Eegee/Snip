@@ -67,7 +67,7 @@ namespace Winter
                                     this.SaveBlankImage();
                                 }
 
-                                TextHandler.UpdateText(Globals.ResourceManager.GetString("NoTrackPlaying"));
+                                TextHandler.UpdateTextAndEmptyFilesMaybe(Globals.ResourceManager.GetString("NoTrackPlaying"));
                             }
                             else
                             {
@@ -77,16 +77,27 @@ namespace Winter
 
                                 if (jsonSummary != null)
                                 {
-                                    jsonSummary = SimpleJson.DeserializeObject(jsonSummary["tracks"].ToString());
+                                    var numberOfResults = jsonSummary.info.num_results;
 
-                                    TextHandler.UpdateText(
-                                        jsonSummary[0].name.ToString(),
-                                        jsonSummary[0].artists[0].name.ToString(),
-                                        jsonSummary[0].album.name.ToString());
-
-                                    if (Globals.SaveAlbumArtwork)
+                                    if (numberOfResults > 0)
                                     {
-                                        this.HandleSpotifyAlbumArtwork(jsonSummary[0].name.ToString());
+                                        jsonSummary = SimpleJson.DeserializeObject(jsonSummary["tracks"].ToString());
+
+                                        TextHandler.UpdateText(
+                                            jsonSummary[0].name.ToString(),
+                                            jsonSummary[0].artists[0].name.ToString(),
+                                            jsonSummary[0].album.name.ToString());
+
+                                        if (Globals.SaveAlbumArtwork)
+                                        {
+                                            this.HandleSpotifyAlbumArtwork(jsonSummary[0].name.ToString());
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // In the event of an advertisement (or any song that returns 0 results)
+                                        // then we'll just write the whole title as a single string instead.
+                                        TextHandler.UpdateText(spotifyTitle);
                                     }
                                 }
                             }
@@ -159,7 +170,7 @@ namespace Winter
                 this.SaveBlankImage();
             }
 
-            TextHandler.UpdateText(Globals.ResourceManager.GetString("SpotifyIsNotRunning"));
+            TextHandler.UpdateTextAndEmptyFilesMaybe(Globals.ResourceManager.GetString("SpotifyIsNotRunning"));
 
             this.Found = false;
             this.NotRunning = true;
@@ -175,7 +186,7 @@ namespace Winter
                         string.Format(
                             CultureInfo.InvariantCulture,
                             "http://ws.spotify.com/search/1/track.json?q={0}",
-                            HttpUtility.UrlEncode(spotifyTitle.Replace(":", string.Empty))));
+                            HttpUtility.UrlEncode(spotifyTitle)));
 
                     if (!string.IsNullOrEmpty(downloadedJson))
                     {

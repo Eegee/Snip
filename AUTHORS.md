@@ -22,3 +22,10 @@ Contributors
 * SirMarksomnian
   * Unicode WebClient support
   * Updated artwork downloading for Spotify
+
+* Erik Jan Meijer (Eegee)
+  * Updated Dutch translations
+  * Fix for VS project paths with spaces
+
+* gummi
+  * Norwegian translation

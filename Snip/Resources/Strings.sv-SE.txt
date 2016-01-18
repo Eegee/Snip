@@ -15,57 +15,57 @@ VLC=VLC
 
 ; This text is saved to the Snip.txt file when the user switches media players
 ; from the right-click context menu.
-SwitchedToSpotify=Auf Spotify gewechselt
-SwitchedToiTunes=Auf iTunes gewechselt
-SwitchedToWinamp=Auf Winamp gewechselt
-SwitchedTofoobar2000=Auf foobar2000 gewechselt
-SwitchedToVLC=Auf VLC gewechselt
+SwitchedToSpotify=Bytte till Spotify
+SwitchedToiTunes=Bytte till iTunes
+SwitchedToWinamp=Bytte till Winamp
+SwitchedTofoobar2000=Bytte till foobar2000
+SwitchedToVLC=Bytte till VLC
 
 ; This text is saved to the Snip.txt file when Snip itself is running but Snip
 ; does not detect the selected media player as running.
-SpotifyIsNotRunning=Spotify läuft im Moment nicht
-iTunesNotRunning=iTunes läuft im Moment nicht
-WinampIsNotRunning=Winamp läuft gerade nicht
-foobar2000IsNotRunning=foobar2000 läuft gerade nicht
-VLCIsNotRunning=VLC läuft gerade nicht
+SpotifyIsNotRunning=Spotify körs inte just nu
+iTunesNotRunning=iTunes körs inte just nu
+WinampIsNotRunning=Winamp körs inte just nu
+foobar2000IsNotRunning=foobar2000 körs inte just nu
+VLCIsNotRunning=VLC körs inte just nu
 
 ; This text is saved to the Snip.txt file when no track is playing in the
 ; selected media file or when the user stops/pauses a playing track.
-NoTrackPlaying=Im Moment wird kein Track abgespielt
+NoTrackPlaying=Inget spår spelas
 
 ; This text is displayed on the right-click context menu and, when clicked,
 ; will open up the "Set Output Format" form where the user can customize how
 ; the text will look when saved to any of the text files.
-SetOutputFormat=Ausgabeformat festlegen
+SetOutputFormat=Ställ in outputformat
 
 ; This text is displayed on the right-click context menu and, when enabled,
 ; will save the artist information and song information to separate text files
 ; on the harddrive.
-SaveInformationSeparately=Information separat speichern
+SaveInformationSeparately=Spara information separat
 
 ; This text is displayed on the right-click context menu and, when enabled,
 ; will download and save album artwork for the currently playing track to the
 ; harddrive.
-SaveAlbumArtwork=Album-Bild speichern
+SaveAlbumArtwork=Spara omslagsbild
 
 ; This text is displayed on the right-click context menu and, when enabled,
 ; will save the artwork to a subdirectory using the trackid information
 ; provided by Spotify as the filename.  Each track will save its own album
 ; artwork and the next time that track is played it will use the saved file
 ; instead of redownloading it each time.
-KeepSpotifyAlbumArtwork=Abum-Bild behalten
+KeepSpotifyAlbumArtwork=Spara Spotify-omslagsbild
 
 ; These texts are displayed under a sub-menu of "Keep Spotify Album Artwork"
 ; and it refers to the image resolution of the artwork to be downloaded.
-ImageResolutionTiny=Winzig
-ImageResolutionSmall=Klein
-ImageResolutionMedium=Mittel
-ImageResolutionLarge=Gross
+ImageResolutionTiny=Mycket liten
+ImageResolutionSmall=Liten
+ImageResolutionMedium=Mellan
+ImageResolutionLarge=Stor
 
 ; This text is displayed on the right-click context menu and, when enabled,
 ; will create a file called Snip_History.txt where it will append each track
 ; played to the end of the file, effectively creating a play history.
-SaveTrackHistory=Track-Verlauf speichern
+SaveTrackHistory=Spara spårhistorik
 
 ; This text is displayed on the right-click context menu and, when enabled,
 ; will cause a popup notification to display on the desktop with the
@@ -76,42 +76,41 @@ DisplayTrackPopup=Display Track Popup
 ; will cause Snip.txt to be emptied out when no track is playing.  If this
 ; option is disabled then the text from "NoTrackPlaying" will be saved to
 ; Snip.txt.
-EmptyFile=Empty File If No Track Playing
+EmptyFile=Töm fil om inget spelas
 
 ; This text is displayed on the right-click context menu and, when enabled,
 ; will cause Snip to register global hotkeys that can be used to control the
 ; selected media player from anywhere.
-EnableHotkeys=Enable Hotkeys
+EnableHotkeys=Sätt på kortkommandon
 
 ; This text is displayed on the right-click context menu and, when clicked,
 ; will exit the application.
-ExitApplication=Beenden
+ExitApplication=Avsluta
 
 ; This text is displayed in a MessageBox pop-up when there is a COM exception
 ; caused by trying to load the iTunes COM library.
-iTunesException=Bitte beenden Sie iTunes und wählen Sie iTunes in Snip
+iTunesException=Var god avsluta iTunes och välj iTunes igen innuti Snip.
 
 ######################
 # Output Format Form #
 ######################
 
 ; This text is displayed as the title of the Output Format Form.
-; SetOutputFormatForm=Set Output Format
-SetOutputFormatForm=Ausgabe-Format festlegen
+SetOutputFormatForm=Ställ in outputformat
 
 ; These texts refer to setting how specific output looks when saved to any of
 ; the text files.  The $t, $a, and $l variables will be filled in with the
 ; track, artist, and album information of the currently playing track.
-SetTrackFormat=Track Format festlegen ($t):
-SetSeparatorFormat=Separator Format festlegen:
-SetArtistFormat=Artist Format festlegen ($a):
-SetAlbumFormat=Album Format festlegen ($l):
+SetTrackFormat=Ställ in spårformat ($t):
+SetSeparatorFormat=Ställ in särskiljningsformat:
+SetArtistFormat=Ställ in artistformat ($a):
+SetAlbumFormat=Ställ in albumformat ($l):
 
 ; This text is displayed on the buttons within this form.  Clicking the
 ; Defaults button will restore the output format settings to their default
 ; appearance.  Clicking the Save button will save the user-set appearance.
-ButtonDefaults=Voreinstellungen
-ButtonSave=Speichern
+ButtonDefaults=Standarder
+ButtonSave=Spara
 
 ; These will most likely not need to be translated.  However, if your locale
 ; uses different dashes or quotation marks then you can alternatively change

@@ -31,8 +31,6 @@ namespace Winter
     {
         #region Fields
 
-        // There are none.
-
         KeyboardHook keyboardHook = new KeyboardHook();
 
         #endregion
@@ -50,9 +48,10 @@ namespace Winter
             this.InitializeComponent();
 
             this.Load += new EventHandler(this.Snip_Load);
+            this.FormClosing += new FormClosingEventHandler(this.Snip_FormClosing);
 
             // Set the icon of the system tray icon.
-            this.notifyIcon.Icon = new Icon(this.Icon, 48, 48);
+            this.notifyIcon.Icon = Properties.Resources.SnipIcon;
             Globals.SnipNotifyIcon = this.notifyIcon;
 
             // Minimize the main window.
@@ -116,6 +115,12 @@ namespace Winter
             this.Hide();
         }
 
+        private void Snip_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Save settings automatically when the form is being closed.
+            Settings.Save();
+        }
+
         private void LoadSettings()
         {
             Settings.Load();
@@ -167,6 +172,7 @@ namespace Winter
             }
 
             this.toolStripMenuItemSaveHistory.Checked = Globals.SaveHistory;
+            this.toolStripMenuItemDisplayTrackPopup.Checked = Globals.DisplayTrackPopup;
             this.toolStripMenuItemEmptyFileIfNoTrackPlaying.Checked = Globals.EmptyFileIfNoTrackPlaying;
             this.toolStripMenuItemEnableHotkeys.Checked = Globals.EnableHotkeys;
         }
@@ -237,7 +243,7 @@ namespace Winter
             Globals.CurrentPlayer.Load();
 
             Globals.PlayerSelection = Globals.MediaPlayerSelection.Spotify;
-            TextHandler.UpdateText(Globals.ResourceManager.GetString("SwitchedToSpotify"));
+            TextHandler.UpdateTextAndEmptyFilesMaybe(Globals.ResourceManager.GetString("SwitchedToSpotify"));
         }
 
         private void ToggleiTunes()
@@ -253,7 +259,7 @@ namespace Winter
             Globals.CurrentPlayer.Load();
 
             Globals.PlayerSelection = Globals.MediaPlayerSelection.iTunes;
-            TextHandler.UpdateText(Globals.ResourceManager.GetString("SwitchedToiTunes"));
+            TextHandler.UpdateTextAndEmptyFilesMaybe(Globals.ResourceManager.GetString("SwitchedToiTunes"));
         }
 
         private void ToggleWinamp()
@@ -269,7 +275,7 @@ namespace Winter
             Globals.CurrentPlayer.Load();
 
             Globals.PlayerSelection = Globals.MediaPlayerSelection.Winamp;
-            TextHandler.UpdateText(Globals.ResourceManager.GetString("SwitchedToWinamp"));
+            TextHandler.UpdateTextAndEmptyFilesMaybe(Globals.ResourceManager.GetString("SwitchedToWinamp"));
         }
 
         private void Togglefoobar2000()
@@ -285,7 +291,7 @@ namespace Winter
             Globals.CurrentPlayer.Load();
 
             Globals.PlayerSelection = Globals.MediaPlayerSelection.foobar2000;
-            TextHandler.UpdateText(Globals.ResourceManager.GetString("SwitchedTofoobar2000"));
+            TextHandler.UpdateTextAndEmptyFilesMaybe(Globals.ResourceManager.GetString("SwitchedTofoobar2000"));
         }
 
         private void ToggleVLC()
@@ -301,7 +307,7 @@ namespace Winter
             Globals.CurrentPlayer.Load();
 
             Globals.PlayerSelection = Globals.MediaPlayerSelection.VLC;
-            TextHandler.UpdateText(Globals.ResourceManager.GetString("SwitchedToVLC"));
+            TextHandler.UpdateTextAndEmptyFilesMaybe(Globals.ResourceManager.GetString("SwitchedToVLC"));
         }
 
         private void ToolStripMenuItemSaveSeparateFiles_Click(object sender, EventArgs e)
@@ -360,10 +366,22 @@ namespace Winter
             Globals.SaveHistory = this.toolStripMenuItemSaveHistory.Checked;
         }
 
+        private void ToolStripMenuItemDisplayTrackPopup_Click(object sender, EventArgs e)
+        {
+            if (this.toolStripMenuItemDisplayTrackPopup.Checked)
+            {
+                this.toolStripMenuItemDisplayTrackPopup.Checked = false;
+            }
+            else
+            {
+                this.toolStripMenuItemDisplayTrackPopup.Checked = true;
+            }
+
+            Globals.DisplayTrackPopup = this.toolStripMenuItemDisplayTrackPopup.Checked;
+        }
+
         private void ToolStripMenuItemExit_Click(object sender, EventArgs e)
         {
-            Settings.Save();
-
             Application.Exit();
         }
 
